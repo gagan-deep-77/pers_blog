@@ -106,21 +106,31 @@
           
             {%if post.user == request.user%}
               <button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-red-400 active:bg-gray-200 disabled:opacity-50 mr-4 bg-cyan-500 " onclick="open_delete('{{post.id}}')" >Delete</button>
+              <button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-red-400 active:bg-gray-200 disabled:opacity-50 mr-4 bg-cyan-500 " onclick="make_private('{{post.id}}')" >Make Private</button>
               {%endif%}
              <!-- <a href="{%url 'like-post' post.id%}"><button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "><span>{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button></a>  -->
+            
+             <!-- TEMPLATE LIKE BUTTON {{
+                <button id="like_btn" class="shadow-2xl shadow-white-500/50 py-2 px-4 bg-white-400 border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "><span class="">{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button>
+             }} -->
+
+             <!-- LIKED RED BUTTON {{
+                <button id="like_btn" onclick="unlike_post('{{post.id}}')" class="shadow-2xl shadow-red-500/50 py-2 px-4 bg-red-400 border border-gray-200 text-gray-600 rounded hover:bg-red-300 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "><span class="">{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button>
+             }} -->
              {%if hasbeen_liked == True%}
-             <button id="like_btn" onclick="unlike_post('{{post.id}}')" class="shadow-2xl shadow-red-500/50 py-2 px-4 bg-red-400 border border-gray-200 text-gray-600 rounded hover:bg-red-300 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "><span class="">{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button>
-            {%elif hasbeen_liked == False%}
-             <button id="like_btn" onclick="like_post('{{post.id}}')" class="shadow-2xl shadow-white-500/50 py-2 px-4 bg-white-400 border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "><span class="">{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button>
-            {%else%}
+
+             <button id="btn{{post.id}}" class="shadow-2xl shadow-red-500/50 py-2 px-4 bg-red-400 border border-gray-200 text-gray-600 rounded hover:bg-red-300 active:bg-gray-200 disabled:opacity-50 bg-cyan-500" onclick="like_unlike('{{post.id}}')" post_id={{post.id}}><span class="" id="span{{post.id}}">{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button>
+             {%elif hasbeen_liked == False%}
+             <button id="btn{{post.id}}" class="shadow-2xl shadow-white-500/50 py-2 px-4 bg-white-400 border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 " onclick="like_unlike('{{post.id}}')" post_id={{post.id}}><span class="" id="span{{post.id}}">{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button>
+             {%else%}
              <button id="like_btn" class="shadow-2xl shadow-white-500/50 py-2 px-4 bg-white-400 border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "><span class="">{{post.total_likes}}</span><svg class="w-4 h-4  fill-current" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></button>
-            {%endif%}   
+             {%endif%}
+  
             </div></div>
                <hr>
   {%endfor%}
 </div>
 {%elif page == "private"%}
-
 <div id="the_post_container" page = "private" style="font-family: Inter, sans-serif">
   {%for post in posts%}
   {%is_liked post.id request.user as hasbeen_liked%}
@@ -179,6 +189,19 @@
       location.reload()
       }
 
+      function make_private(post_id){
+        $.ajax({
+        type: "POST",
+        url: '{{'make-private/$post_id'}}'.replace('$post_id',post_id),
+        data: {csrfmiddlewaretoken:'{{csrf_token}}',id:post_id},
+        success: function callback(response){
+          console.log("the function was successful!")
+          
+        }
+      })
+      location.reload()
+      }
+      
       function open_delete(post_id){
         const the_z = document.getElementById("low_z")
         const the_post_container = document.getElementById("the_post_container")
@@ -206,35 +229,39 @@
   
         
       }
-      function unlike_post(post_id){
-        const like_btn = document.getElementById("like_btn")
-        $.ajax({
-        type: "POST",
-        url: '{{'unlike-post/$post_id'}}'.replace('$post_id',post_id),
-        data: {csrfmiddlewaretoken:'{{csrf_token}}',id:post_id},
-        success: function callback(response){
-          
-          
+      function like_unlike(post_id){
+          const btn_id = "btn" + String(post_id)
+          const like_btn = document.getElementById(btn_id)
+          const span_id = "span" + String(post_id)    
+          const liked_span = document.getElementById(span_id)
+          if(like_btn.className == "shadow-2xl shadow-white-500/50 py-2 px-4 bg-white-400 border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "){
+          const URL = "like-post/" + String(post_id)
+          $.ajax({
+              type: "POST",
+              url: URL,
+              data: {csrfmiddlewaretoken:'{{csrf_token}}'},
+              success: function(response){
+                 
+                  
+                  liked_span.textContent = response.likes
+                  like_btn.className = "shadow-2xl shadow-red-500/50 py-2 px-4 bg-red-400 border border-gray-200 text-gray-600 rounded hover:bg-red-300 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "
+                  console.log("liked!")
+              }
+          })
+        }else{
+            const URL = "unlike-post/" + String(post_id)
+            $.ajax({
+                type: "POST",
+                url:URL,
+                data: {csrfmiddlewaretoken:'{{csrf_token}}'},
+                success: function(response){
+                    liked_span.textContent = response.likes
+                    like_btn.className = "shadow-2xl shadow-white-500/50 py-2 px-4 bg-white-400 border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 bg-cyan-500 "
+                    console.log("unliked!")
+                }
+            })
         }
-      })
-      location.reload()
       }
-      
-      function like_post(post_id){
-        const like_btn = document.getElementById("like_btn")
-        $.ajax({
-        type: "POST",
-        url: '{{'like-post/$post_id'}}'.replace('$post_id',post_id),
-        data: {csrfmiddlewaretoken:'{{csrf_token}}',id:post_id},
-        success: function callback(response){
-          console.log("the post was liked!")
-          console.log(response.color)
-          
-        }
-      })
-      location.reload()
-      }
-
 
       function post_delete(){
           post_id = document.getElementById("main_delete").getAttribute("post_id")

@@ -1,33 +1,90 @@
+{%load tailwind_tags%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Document</title>
+    {%tailwind_css%}
 </head>
 <style>
-    header{
-        font-size: 4vh;
-        font-family: Arial, Helvetica, sans-serif;
-        width: 100%;
+    *{
+        padding: 0;
+    }
+    iframe, object, embed {
+    max-width: 100%;
+}
+
+
+    #header{
+        display: flex;
+        flex-direction: column;
+        color: black;
+        /* background: slategray; */
+
+    }
+    #header > div{
         text-align: center;
+        width: 100%;
+        font-size: 5vh;
     }
-    #author_name{
-        font-size: 2vh;
-        text-align:right;
-        width: 55%;
+    @media only screen and (max-width: 700px){
+        #header{
+            flex-direction: column !important;
+        }
+        #header > div{
+            width: 100% !important;
+            text-align: center !important;
+        }
     }
+    @media only screen and (max-width: 768px) {
+        h1{
+            padding: 0 !important;
+        }
+        html > *{
+            font-size: 12px !important;
+            padding: 0 !important;
+        }
+        body *{
+            padding: 0 !important;
+        }
+
+        p{
+            padding: 0 !important;  
+            font-size: 1.2rem !important;
+        }
+    }
+    video {
+    width: 100%;
+    max-height: 100%;
+  }
 </style>
 <body>
-    <header>
-        {{post.title}}
-        <a href=""><div id="author_name">{{post.user.username}}</div></a>
-    </header>
+    <div id="header" class="mt-3">
+        <div id="post_title" class="font-mono text-xl font-bold shadow-2xl" style="font-family: Inter, sans-serif">
+            {{post.title}}
+        </div>
+        <div id="post_info" style="text-align:center;font-size:3vh;top: 50%;margin-bottom: 2%;">
+            by <a href="">{{post.user.username}}</a> {{post.pub_date}}
 
-    <div id="body">
+        </div>
+        <div style="margin-bottom: 2%;">
+
+        </div>
+    </div>
+
+    <div id="body" class="font-mono text-2xl font-medium" style="font-family: Inter, sans-serif;">
         {{post.body|safe}}
     </div>
-    
+    <script>
+        console.log("the function ran!")
+        element = document.getElementsByTagName("img")
+        element.className = "object-fill"
+    </script>
 </body>
 </html>

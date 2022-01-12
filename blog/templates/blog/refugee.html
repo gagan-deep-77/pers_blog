@@ -1,0 +1,36 @@
+{%load tailwind_tags%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Document</title>
+    {%tailwind_css%}
+</head>
+<style>
+    body > *{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+<body>
+    <div id="header">
+        <div id="post_title" style="font-family: 'Raleway', sans-serif;">
+            {{post.title}}
+        </div>
+        <div id="post_info" style="text-align:center;font-size:3vh;top: 50%;">
+            by <a href="">{{post.user.username}}</a> {{post.pub_date}}
+        </div>
+    </div>
+
+    <div id="body">
+        {{post.body|safe}}
+    </div>
+    
+</body>
+</html>

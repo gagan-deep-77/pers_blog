@@ -11,8 +11,12 @@ class Post(models.Model):
     # body = RichTextField(blank=True,null=True)
     body = HTMLField(default="")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    likes= models.IntegerField(default=0)
     pub_date = models.DateTimeField(default=now,editable=False)
+    home_desc = models.CharField(max_length=200)
+    likes = models.ManyToManyField(User,related_name="blog_posts")
+    private = models.BooleanField(default=False)
+    def total_likes(self):
+        return self.likes.count()
     def __str__(self):
         return self.title[:20]
 class Comment(models.Model):
@@ -24,5 +28,8 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,default=None)
     def __str__(self):
         return self.body[:64]
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 

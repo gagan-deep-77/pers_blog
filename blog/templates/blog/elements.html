@@ -1,0 +1,43 @@
+<!-- SCRIPT FOR CLOSING, OPENING AND CALLING FUNCTION IN DJANGO VIEW -->
+
+<script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js">
+    document.getElementById("trigger_delete").onclick = function(){open_delete()}
+      document.getElementById("cancel_btn").onclick = function(){open_close_delete()}
+      document.getElementById("delete_btn").onclick = function(){post_delete()}
+      function open_delete(){
+        const element = document.getElementById("main_delete")
+        console.log(element.style.display)
+        console.log("please work!")
+        element.style.display = "inline-block"
+      }
+      function open_close_delete(){
+        
+        console.log("this function ran!")
+        const element = document.getElementById("main_delete");
+        console.log(element.style.display)
+        console.log(window.getComputedStyle(element).display)
+        if (element.style.display == "none"){
+            element.style.display = "block"
+        }
+        else{
+          element.style.display = "none"
+        }
+  
+        
+      }
+      function post_delete(){
+        var id = 2
+        $.ajax({
+        type: "POST",
+        url: '{{'viewPost/2'}}',
+        data: {csrfmiddlewaretoken:'{{csrf_token}}',id:id},
+        success: function callback(response){
+          console.log("the function ran!")
+          location.reload()
+        }
+      })
+      }
+  </script>
+
+
+<!-- END OF SCRIPT -->
