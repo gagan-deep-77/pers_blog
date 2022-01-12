@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from .models import Post,Comment,Like
+from .models import Post,Comment
 from django import db
 from .forms import PostForm
 from django.http import HttpResponse
